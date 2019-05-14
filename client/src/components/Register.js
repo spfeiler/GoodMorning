@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 class Register extends Component {
@@ -8,14 +9,14 @@ class Register extends Component {
     super()
 
     this.state = {
+      firstName: '',
+      lastName: '',
       username: '',
-      password: '',
-      name: ''
+      password: ''
     }
   }
 
 handleTextBoxChange = (e) => {
-
   this.setState({
     [e.target.name]: e.target.value
   })
@@ -24,23 +25,26 @@ handleTextBoxChange = (e) => {
 handleRegisterClick = () => {
 
   axios.post('http://localhost:8080/register', {
+
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
     username: this.state.username,
     password: this.state.password,
-    name: this.state.name
 
 
-  }).then(response => {
-    this.props.history.push('/')
   })
+  .then(this.props.history.push('/'))
+
 }
 
   render() {
     return (
       <div>
         <h1>Register New Account</h1>
-        <input name="username" onChange={this.handleTextBoxChange} placeholder='Register Username'></input>
-        <input name="password" onChange={this.handleTextBoxChange} placeholder='Register Password'></input>
-        <input name="name" onChange={this.handleTextBoxChange} placeholder='Register Name'></input>
+        <input name="firstName" onChange={this.handleTextBoxChange} placeholder='Enter First Name'></input>
+        <input name="lastName" onChange={this.handleTextBoxChange} placeholder='Enter Last Name'></input>
+        <input name="username" onChange={this.handleTextBoxChange} placeholder='Enter Username'></input>
+        <input name="password" onChange={this.handleTextBoxChange} placeholder='Enter Password'></input>
         <button onClick={this.handleRegisterClick}>Register</button>
       </div>
 
@@ -48,4 +52,10 @@ handleRegisterClick = () => {
   }
 }
 
-export default (withRouter(Register))
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthenticated: (token) => dispatch({type: "ON_AUTHENTICATED", token: token})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Register))
