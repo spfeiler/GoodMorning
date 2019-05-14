@@ -22,12 +22,13 @@ class Login extends Component {
     }).then(response => {
 
       let token = response.data.token
-      console.log(token)
+      let userId = response.data.id
+      console.log(token, userId)
 
 
       localStorage.setItem('jsonwebtoken', token)
 
-      this.props.onAuthenticated(token)
+      this.props.onAuthenticated(token, userId)
 
       setAuthenticationHeader(token)
 
@@ -48,7 +49,7 @@ class Login extends Component {
       <div>
       <h1>Login</h1>
         <input name="username" onChange={this.handleTextBoxChange} placeholder="Enter Username"></input>
-        <input name="password" onChange={this.handleTextBoxChange} placeholder="Enter Password"></input>
+        <input name="password" type="password" onChange={this.handleTextBoxChange} placeholder="Enter Password"></input>
         <button onClick={() => {this.handleLoginClick() }}>Login</button>
       </div>
     )
@@ -57,7 +58,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthenticated: (token) => dispatch({type: 'ON_AUTHENTICATED', token: token})
+    onAuthenticated: (token, userId) => dispatch({type: 'ON_AUTHENTICATED', token: token, id:userId})
   }
 }
 

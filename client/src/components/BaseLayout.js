@@ -28,7 +28,6 @@ class Menu extends Component {
       {this.props.isAuthenticated ?   <li><NavLink to = '/home'>Home</NavLink></li> : null }
       {this.props.isAuthenticated ?   <li><NavLink to = '/news'>News</NavLink></li> : null }
       {this.props.isAuthenticated ?   <li><NavLink to = '/journal'>Journal</NavLink></li> : null }
-      <li><NavLink to = '/donate'>Donate</NavLink></li>
       {this.props.isAuthenticated ?   <li><a onClick={this.handleLogoutClick} href="#">Logout</a></li> : null }
       </ul>
     )

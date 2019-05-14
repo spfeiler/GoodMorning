@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "hlmmkpoz",
+    "password": "XVLeO41pICEq9f0KVU7ucEvrkob_o6hB",
+    "database": "hlmmkpoz",
+    "host": "otto.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "hlmmkpoz",
+    "password": "XVLeO41pICEq9f0KVU7ucEvrkob_o6hB",
+    "database": "hlmmkpoz",
+    "host": "otto.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "hlmmkpoz",
+    "password": "XVLeO41pICEq9f0KVU7ucEvrkob_o6hB",
+    "database": "hlmmkpoz",
+    "host": "otto.db.elephantsql.com",
+    "dialect": "postgres"
+  }
+}

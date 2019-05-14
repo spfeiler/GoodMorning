@@ -1,5 +1,6 @@
 const initialState = {
-    isAuthenticated: false
+    isAuthenticated: false,
+    uid:0
   }
 
   const reducer = (state = initialState, action) => {
@@ -8,7 +9,8 @@ const initialState = {
       case 'ON_AUTHENTICATED':
         return {
           ...state, // spread operator
-          isAuthenticated: action.token != null ? true : false
+          isAuthenticated: action.token != null ? true : false,
+          uid: action.id
         }
       case 'LOGOUT':
         return {

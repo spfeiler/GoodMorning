@@ -10,7 +10,6 @@ import { setAuthenticationHeader } from './utils/authenticate'
 import BaseLayout from './components/BaseLayout'
 import Login from './components/Login'
 import Register from './components/Register'
-import Donate from './components/Donate'
 import Home from './components/Home'
 import News from './components/News'
 import Journal from './components/Journal'
@@ -36,7 +35,6 @@ ReactDOM.render(
       <Route path = "/journal" component = {requireAuth(Journal)} />
       <Route path = "/favorites" component = {requireAuth(Favorites)} />
       <Route path = "/addentry" component = {requireAuth(AddEntry)} />
-      <Route path = "/donate" component = {Donate} />
     </Switch>
     </BaseLayout>
   </BrowserRouter>
