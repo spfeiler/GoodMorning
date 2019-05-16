@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
-class News extends Component {
+class TopNews extends Component {
 
   constructor() {
     super()
@@ -15,7 +14,7 @@ class News extends Component {
   }
 
   componentDidMount() {
-    let url = "https://www.reddit.com/r/upliftingnews/new/.json?limit=20"
+    let url = "https://www.reddit.com/r/upliftingnews/hot/.json?limit=3"
 
     fetch(url)
     .then(response => response.json())
@@ -36,39 +35,47 @@ class News extends Component {
     })
   }
 
-  viewFavs = () => {
+  handleRedirectFavs = () => {
+
     this.props.history.push('/favorites')
   }
 
-favNews(article) {
+  handleRedirectNews = () => {
 
-  fetch('http://localhost:8080/favorites', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      thumbnail: article.data.thumbnail,
-      title: article.data.title,
-      url: article.data.url,
-      user: this.props.user,
-      id: article.data.id
+    this.props.history.push('/news')
+  }
+
+  favNews(article) {
+
+    fetch('http://localhost:8080/favorites', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        thumbnail: article.data.thumbnail,
+        title: article.data.title,
+        url: article.data.url,
+        user: this.props.user,
+        id: article.data.id
+      })
     })
-  })
-  .then(response => response.json())
-  .then(result => {
-    if(result.success) {
-      console.log('success')
-      this.viewFavs()
-    } else {
-      console.log('error')
-    }
-  })
-}
+    .then(response => response.json())
+    .then(result => {
+      if(result.success) {
+        console.log('success')
+        this.handleRedirectFavs()
+      } else {
+        console.log('error')
+      }
+    })
+  }
 
   render() {
-    return(
+    return (
       <div>
-      <h1>News</h1>
+      <h3>Top News Picks For You</h3>
       {this.state.newsList}
+      <button onClick={this.handleRedirectNews}>View All News</button>
+      <button onClick={this.handleRedirectFavs}>View Favorites</button>
       </div>
     )
   }
@@ -80,4 +87,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(News))
+export default connect(mapStateToProps)(withRouter(TopNews))

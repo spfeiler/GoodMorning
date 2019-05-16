@@ -11,7 +11,13 @@ module.exports = {
       date: {
         type: Sequelize.STRING
       },
-      entry: {
+      entry_one: {
+        type: Sequelize.TEXT
+      },
+      entry_two: {
+        type: Sequelize.TEXT
+      },
+      entry_three: {
         type: Sequelize.TEXT
       },
       user: {

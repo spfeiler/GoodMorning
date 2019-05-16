@@ -18,17 +18,10 @@ class Journal extends Component {
     fetch(url)
     .then(response => response.json())
     .then(json => {
-      let entryList = json.map((entry) => {
-        if(entry.user === this.props.user) {
-          return ( <div key = {entry.id}>
-            <h3>{entry.date}</h3>
-            <p>{entry.entry}</p>
-            <button onClick={() => this.deleteEntry(entry)}>Delete</button>
-          </div>
-          )
-        }
+      let entries = json.map((entry) => {
+        return {id: entry.id, user: entry.user, date: entry.date, entry_one: entry.entry_one, entry_two: entry.entry_two, entry_three: entry.entry_three}
       })
-      this.setState({entryList: entryList})
+      this.setState({entryList: entries})
     })
   }
 
@@ -38,12 +31,25 @@ class Journal extends Component {
   }
 
   render() {
+    let entryList = this.state.entryList.map((entry) => {
+      if(entry.user === this.props.user) {
+        return ( <div key = {entry.id}>
+          <h3>Entry Date: {entry.date}</h3>
+          <h4>Today I am grateful for...</h4>
+          <p>1. {entry.entry_one}</p>
+          <p>2. {entry.entry_two}</p>
+          <p>3. {entry.entry_three}</p>
+          <button onClick={() => this.deleteEntry(entry)}>Delete</button>
+        </div>
+        )
+      }
+    })
     return (
       <div>
         <h3>Add a new entry?</h3>
         <button onClick={this.handleRedirectEntry}>Add New Entry</button>
         <h1>Journal</h1>
-        {this.state.entryList}
+        {entryList}
       </div>
     )
   }
@@ -65,7 +71,11 @@ class Journal extends Component {
         console.log('error')
       }
     })
-    this.setState({entryList: this.props.entryList})
+    console.log(this.state.entryList)
+    this.setState({entryList: this.state.entryList.filter(entry => {
+      return entry.id != deleteId.entryKey
+    })
+  })
   }
 }
 
