@@ -37,6 +37,7 @@ handleRegisterClick = () => {
 
 }
 
+
   render() {
     return (
       <div>

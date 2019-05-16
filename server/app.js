@@ -83,12 +83,16 @@ app.post('/register', (req, res) => {
 app.post('/entry', (req, res) => {
 
   let date = req.body.date
-  let entry = req.body.entry
+  let entry_one = req.body.entry_one
+  let entry_two = req.body.entry_two
+  let entry_three = req.body.entry_three
   let user = req.body.user
 
-  let journalEntry = models.Journal.build({
+  let journalEntry = models.Journals.build({
     date: date,
-    entry: entry,
+    entry_one: entry_one,
+    entry_two: entry_two,
+    entry_three: entry_three,
     user: user
   })
 
@@ -101,19 +105,65 @@ app.post('/entry', (req, res) => {
   })
 })
 
+app.get('/users', async (req, res) => {
+
+  let userList = await models.Users.findAll()
+  res.json(userList)
+})
+
 app.get('/entry', async (req, res) => {
 
-  let entryList = await models.Journal.findAll()
+  let entryList = await models.Journals.findAll()
   res.json(entryList)
 })
 
 app.post('/delete', (req, res) => {
-  models.Journal.destroy({
+  models.Journals.destroy({
     where: {
       id: req.body.entryKey
     }
   })
 })
+
+app.post('/favorites', (req, res) => {
+
+  let thumbnail = req.body.thumbnail
+  let title = req.body.title
+  let url = req.body.url
+  let articleId = req.body.id
+  let user = req.body.user
+
+  let favArticle = models.Favorites.build({
+    thumbnail: thumbnail,
+    title: title,
+    url: url,
+    articleId: articleId,
+    user: user
+  })
+
+  favArticle.save().then((savedArticle) => {
+    if(savedArticle) {
+      res.json({success: true})
+    } else {
+      res.json({success: false, message: 'Error saving'})
+    }
+  })
+})
+
+app.get('/favorites', async (req, res) => {
+
+  let favList = await models.Favorites.findAll()
+  res.json(favList)
+})
+
+app.post('/deletefav', (req, res) => {
+  models.Favorites.destroy({
+    where: {
+      id: req.body.favKey
+    }
+  })
+})
+
 
 app.listen(PORT,() => {
   console.log('Server is running...')

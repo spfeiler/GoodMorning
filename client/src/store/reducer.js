@@ -1,6 +1,6 @@
 const initialState = {
     isAuthenticated: false,
-    uid:0
+    uid:0,
   }
 
   const reducer = (state = initialState, action) => {
