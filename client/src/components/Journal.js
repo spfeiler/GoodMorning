@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import './Journal.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ class Journal extends Component {
       if(entry.user === this.props.user) {
         return ( <div key = {entry.id}>
           <h3>Entry Date: {entry.date}</h3>
-          <h4>Today I am grateful for...</h4>
+          <h4>Today I am grateful...</h4>
           <p>1. {entry.entry_one}</p>
           <p>2. {entry.entry_two}</p>
           <p>3. {entry.entry_three}</p>
@@ -45,10 +45,9 @@ class Journal extends Component {
       }
     })
     return (
-      <div>
-        <h3>Add a new entry?</h3>
-        <button onClick={this.handleRedirectEntry}>Add New Entry</button>
-        <h1>Journal</h1>
+      <div className="container">
+        <h4>Would you like to add a new journal entry? <button onClick={this.handleRedirectEntry}>Add New Entry</button></h4>
+        <h1>Gratitude Journal</h1>
         {entryList}
       </div>
     )

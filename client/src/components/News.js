@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import './News.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
@@ -25,10 +25,12 @@ class News extends Component {
           article: this.state.article.concat(article)
         })
           return ( <div key = {article.data.id}>
-            <img src={article.data.thumbnail} />
+            <img src={article.data.thumbnail} className="thumbnail" />
+            <div className="articleInfo">
             <h3>{article.data.title}</h3>
             <a href={article.data.url} target="_blank"><button>View Story</button></a>
-            <button onClick={() => this.favNews(article)}>Favorite</button>
+            <button onClick={() => this.favNews(article)}>Add To Favorites</button>
+            </div>
           </div>
           )
         })
@@ -66,8 +68,8 @@ favNews(article) {
 
   render() {
     return(
-      <div>
-      <h1>News</h1>
+      <div className="container">
+      <h1>Today's Uplifting News</h1>
       {this.state.newsList}
       </div>
     )
