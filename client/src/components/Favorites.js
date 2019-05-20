@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import './Favorites.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
@@ -30,17 +30,19 @@ class Favorites extends Component {
     let favList = this.state.favList.map((fav) => {
       if(fav.user === this.props.user) {
         return ( <div key = {fav.id}>
-          <img src={fav.thumbnail} />
+          <img src={fav.thumbnail} className="thumbnail" />
+          <div className="articleInfo">
           <h3>{fav.title}</h3>
           <a href={fav.url} target="_blank"><button>View Story</button></a>
           <button onClick={() => this.deleteFav(fav)}>Delete</button>
+          </div>
         </div>
         )
       }
     })
     return (
-      <div>
-        <h1>Favorites</h1>
+      <div className="container">
+        <h1>Your Favorite Stories</h1>
         {favList}
       </div>
     )

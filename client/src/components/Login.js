@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import About from './About.js';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { setAuthenticationHeader } from '../utils/authenticate'
@@ -47,9 +48,10 @@ class Login extends Component {
   render() {
     return (
       <div>
+      <About />
       <h1>Login</h1>
-        <input name="username" onChange={this.handleTextBoxChange} placeholder="Enter Username"></input>
-        <input name="password" type="password" onChange={this.handleTextBoxChange} placeholder="Enter Password"></input>
+        <p>Username: <input name="username" onChange={this.handleTextBoxChange} placeholder="Enter Username"></input></p>
+        <p>Password: <input name="password" type="password" onChange={this.handleTextBoxChange} placeholder="Enter Password"></input></p>
         <button onClick={() => {this.handleLoginClick() }}>Login</button>
       </div>
     )

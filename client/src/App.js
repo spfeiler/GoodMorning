@@ -12,10 +12,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Login />
         <div>
-          <h3>Don't have an account? Click Below to Register.</h3>
+          <h4>Don't have an account? Click Below to Register.</h4>
           <button onClick={this.handleRedirectRegister}>Register New Account</button>
         </div>
       </div>

@@ -1,0 +1,14 @@
+.container {
+  margin: auto 50px ;
+}
+
+.thumbnail {
+  float: left;
+  margin-right: 10px;
+  height: 85px;
+  width: 160px;
+}
+
+.articleInfo {
+  padding-bottom: 10px;
+}

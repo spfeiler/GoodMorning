@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './TopNews.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
@@ -24,10 +25,12 @@ class TopNews extends Component {
           article: this.state.article.concat(article)
         })
           return ( <div key = {article.data.id}>
-            <img src={article.data.thumbnail} />
-            <h3>{article.data.title}</h3>
+            <img className="thumbnail" src={article.data.thumbnail} />
+            <div className="articleInfo">
+            <h4>{article.data.title}</h4>
             <a href={article.data.url} target="_blank"><button>View Story</button></a>
-            <button onClick={() => this.favNews(article)}>Favorite</button>
+            <button onClick={() => this.favNews(article)}>Add To Favorites</button>
+            </div>
           </div>
           )
         })
@@ -72,10 +75,12 @@ class TopNews extends Component {
   render() {
     return (
       <div>
-      <h3>Top News Picks For You</h3>
+      <h2>Today's Top Uplifting News Stories</h2>
       {this.state.newsList}
-      <button onClick={this.handleRedirectNews}>View All News</button>
-      <button onClick={this.handleRedirectFavs}>View Favorites</button>
+      <div className="newsLinks">
+      <button onClick={this.handleRedirectNews}>View All News Stories</button>
+      <button onClick={this.handleRedirectFavs}>View Your Favorite Stories</button>
+      </div>
       </div>
     )
   }

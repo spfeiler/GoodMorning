@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import './Home.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import TopNews from './TopNews.js'
+import DailyEntry from './DailyEntry.js'
 
 class Home extends Component {
 
@@ -36,9 +37,12 @@ class Home extends Component {
       }
     })
     return (
-      <div>
+      <div className="container">
       <div>
         {userList}
+      </div>
+      <div>
+        <DailyEntry />
       </div>
       <div>
         <TopNews />
@@ -50,7 +54,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    id: state.uid
+    id: state.uid,
   }
 }
 
